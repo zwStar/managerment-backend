@@ -3,6 +3,6 @@
  */
 export default {
     allowOrigin:'http://127.0.0.1:8080',    //跨域地址
-    db:'mongodb://127.0.0.1:27017/token',                          //数据存储的库
+    db:'mongodb://zwVic:adgjmp123@119.29.82.47:27017/example',                          //数据存储的库
     secret:"zwStar"
 }

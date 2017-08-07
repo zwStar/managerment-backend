@@ -10,16 +10,16 @@ module.exports.config    = config;
 module.exports.md5 = str=>md5(str);
 module.exports.paramter = joi;
 
-module.exports.createToken =  (email) =>{ //创建Token
+function createToken(name){
     const token = jwt.sign({
-            email
+            name
         },
         config.secret, {
-            expiresIn: '10s' // 过期时间 这里只设置10s
+            expiresIn: '1h' // 过期时间 这里只设置10s
         });
-    console.log(token);
     return token;
-};
+}
+module.exports.createToken =  createToken;      //创建token
 
 function result(res, data, msg, status) {
     let redata = {};
@@ -44,19 +44,19 @@ module.exports.result = result;
 
 module.exports.checkToken = function (req, res, next) { //从请求cookie中 检查token的状态信息
     let re = /Admin-Token=(.+)/;
+
     let token = req.headers.cookie.match(re)[1];    //从cookie中提取出token
-    console.log(token);
-    let decoded = jwt.verify(token, 'secret', function (err, decoded) { //token解析
+    let decoded = jwt.verify(token, config.secret, function (err, decoded) { //token解析
         if (err) {
             console.log(err);
             if (err.message === "jwt expored") {
                 return result(res, {success:false, msg:'token过期，请重新登录'});
             }
             return result(res, {error: "登录信息有误"});
+        }else{
+            console.log(decoded)
+            req.user = decoded.name;
+            next();
         }
-
-        return result(res, {success:true, msg:'token 正确'});
-        //console.log(decoded)；     //获取信息 进行下一步操作
-        //next();
     });
 };

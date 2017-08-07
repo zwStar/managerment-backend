@@ -1,15 +1,41 @@
 /**
  * Created by 郭泽伟 on 2017/7/31.
  */
-export default class Base{
-    constructor(options){
-        this.model   = options.model || {};
-        this.search  = options.search || {};
+import $ from '../utils'
+export default class Base {
+    constructor(options) {
+        this.model = options.model || {};
+        this.search = options.search || {};
         this.methods = addMethods(this);
     }
 
 }
-function addMethods(_this){
+function addMethods(_this) {
     let methods = {};
+    methods.create = function (req, res, next) {
+        let params = req.method === 'POST' ? req.body : req.query;
+        // console.log(params)
+
+        // let params = {
+        //     workNumber: '201541404239',
+        //     sex: '男',
+        //     name: '苏枫泳',
+        //     tel: '17727705182',
+        //     inductionDate: 'Sat Aug 05 2017 15:50:17 GMT+0800 (中国标准时间)',
+        //     unpaidTime: '30',
+        //     paidTime: '20',
+        //     password: 'adgjmp123',
+        //     course: ['5985666e5b81ff123070bd36', '5985666e5b81ff123070bd35'],
+        //     age: '18'
+        // }
+
+        let createPromise = _this.model.create(params)
+        createPromise.then((results) => {
+            $.result(res, {success: true, message: "添加成功！"});
+        },(error)=>{
+            console.log(error);
+        })
+    }
+
     return methods;
 }

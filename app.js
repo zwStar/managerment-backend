@@ -21,8 +21,9 @@ app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
 });
-app.use('/user',routers.admin);    //请求路由
 
+app.use('/user',routers.admin);    //请求路由
+app.use('/course',routers.course);  //课程相关操作路由
 //连接mongo数据库
 models.connect();
 
