@@ -24,6 +24,9 @@ app.use(function (req, res, next) {
 
 app.use('/user',routers.admin);    //请求路由
 app.use('/course',routers.course);  //课程相关操作路由
+
+app.use('/api/test',routers.test);            //测试
+
 //连接mongo数据库
 models.connect();
 

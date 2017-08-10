@@ -60,3 +60,13 @@ module.exports.checkToken = function (req, res, next) { //从请求cookie中 检
         }
     });
 };
+
+module.exports.isEmpty = function (value) {
+    if (typeof value == 'string') {
+        return value.trim() === '';
+    } else if (typeof value == 'number') {
+        return value === 0;
+    } else {
+        return value === null || value === undefined;
+    }
+};

@@ -34,6 +34,14 @@ export default class Base{
         }
     };
 
+    all(query, selectQuery) {
+        try {
+            return this.model.find(query).select(selectQuery)
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
     update(query,info){
         try{
             return this.model.update(query,{$set:info});
@@ -58,6 +66,9 @@ function addMethods(_this) {
         return _this.create(query);
     }
 
+    methods.all = function(query,selectQuery){
+        return _this.all(query,selectQuery);
+    }
     return methods;
 
 }

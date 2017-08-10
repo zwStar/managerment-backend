@@ -3,7 +3,9 @@
  */
 import admin from './admin'
 import course from './course'
+import test from './test'
 export default {
     admin,
-    course
+    course,
+    test
 }

@@ -4,10 +4,10 @@
 import mongoose from 'mongoose'
 import $ from '../utils'
 import admin from './admin'
-const dbname = $.config.db;
+const dbname = process.env.NODE_ENV === 'test' ? $.config.testdb : $.config.db;
 
 export default {
-    connect:()=>{
+    connect: () => {
         mongoose.Promise = global.Promise;
         let options = {
             db: {native_parser: true},

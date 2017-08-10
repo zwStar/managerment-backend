@@ -14,7 +14,7 @@ function addMethods(_this) {
     let methods = {};
     methods.create = function (req, res, next) {
         let params = req.method === 'POST' ? req.body : req.query;
-        // console.log(params)
+        console.log(params)
 
         // let params = {
         //     workNumber: '201541404239',
@@ -28,6 +28,16 @@ function addMethods(_this) {
         //     course: ['5985666e5b81ff123070bd36', '5985666e5b81ff123070bd35'],
         //     age: '18'
         // }
+
+        // let params = { workNumber: '201541404213',
+        //     name: '温文杰',
+        //     age: '20',
+        //     sex: '男',
+        //     tel: '13553715457',
+        //     unpaidTime: '20',
+        //     paidTime: '20',
+        //     password: '123456',
+        //     course: ['59856467376745135058757d'] }
 
         let createPromise = _this.model.create(params)
         createPromise.then((results) => {
