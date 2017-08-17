@@ -12,8 +12,8 @@ let UserAPI = new Base({
 
 
 UserAPI.methods.login = function (req, res, next) {     //注册
-
-    let LoginPromise = UserModel.find({"email": req.body.name, "password": $.md5(req.body.password)});    //返回一个promise对象
+    console.log(req.body)
+    let LoginPromise = UserModel.find({"email": req.body.name, "password": req.body.password});    //返回一个promise对象
 
     LoginPromise.then((documents) => {
         if (!documents) {                        //如果为空 登录失败 返回login failed

@@ -13,7 +13,14 @@ const methods = {
             parentName:Mock.mock('@cname'),
             tel:Mock.mock('@string("number", 5)'),
             school:Mock.mock('@cname') + "中学",
-            managerTeacher:Mock.mock('@cname')
+            managerTeacher:Mock.mock('@cname'),
+            grade: ["初一","高一"]
+        })
+    },
+    create_user : ()=>{
+        return M.UserModel.create({
+            email:Mock.mock('@string("number", 7)'),
+            password:Mock.mock('@string("number", 7)')
         })
     }
 }

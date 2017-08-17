@@ -4,20 +4,13 @@
 import Base from '../base'
 
 const courseArranged = new Base("CourseArranged",{
-    // workNumber: {type:Base.ObjectId(),ref:'Teacher'},  //可教课程 },      //入职时间
-    // sno:{type:Base.ObjectId(),ref:'Student'},
-    // courseNo:{type:Base.ObjectId(),ref:"Course"},
-    // startTime:{ type: Date},
-    // endTime:{type:Date},
-    // courseNumber:String,
-    // courseHour:Number
-    workNumber: String,  //可教课程 },      //入职时间
-    sno:String,
-    courseNo:String,
-    startTime:{ type: Date},
-    endTime:{type:Date},
-    courseNumber:String,
-    courseHour:Number
-})
+    workNumber: String,  //工号
+    sno:String,         //学号
+    courseNo:String,    //课程号
+    startTime:{ type: Date},    //开始时间
+    endTime:{type:Date},        //结束时间
+    courseNumber:String,        //课程号
+    courseHour:Number           //课程时长
+});
 
 export default courseArranged.methods;

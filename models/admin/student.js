@@ -10,7 +10,8 @@ const Student = new Base("Student",{
     tel:String,
     sendAt:    { type: Date, default: Date.now },
     school:String,
-    managerTeacher:String
+    managerTeacher:String,
+    grade:String
 })
 
 

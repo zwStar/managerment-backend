@@ -22,6 +22,7 @@
     "joi": "^10.6.0",
     "jsonwebtoken": "^7.4.1",
     "mockjs": "^1.0.1-beta3",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.5",
     "should": "^11.2.1",
     "supertest": "^3.0.0"

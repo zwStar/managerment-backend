@@ -47,5 +47,14 @@ function addMethods(_this) {
         })
     }
 
+    methods.all = function (req,res,next) {
+        let allInfoPromise = _this.model.all();
+        allInfoPromise.then((docs)=>{
+            console.log(docs);
+            $.result(res,docs);
+        },(err)=>{
+            console.log(err);
+        })
+    }
     return methods;
 }

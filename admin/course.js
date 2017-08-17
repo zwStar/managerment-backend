@@ -68,40 +68,42 @@ CourseAPI.methods.teacherOptions = function (req, res, next) {
 }
 
 //筛选出年纪
-CourseAPI.methods.findGrade = function(req,res,next){
+CourseAPI.methods.findGrade = function (req, res, next) {
     let query = req.query;
-    let findGradePromise = StudentModel.find({sno:query.sno});
-    findGradePromise.then((doc)=>{
-        $.result(res,{grade:doc.grade});
-    },(err)=>{
+    let findGradePromise = StudentModel.find({sno: query.sno});
+    findGradePromise.then((doc) => {
+        console.log(doc)
+        if ($.isEmpty(doc))
+            $.result(res, "error");
+        $.result(res, {grade: doc.grade});
+    }, (err) => {
         console.log(err);
     })
 }
 
+//安排课程
 
-
-
-
-
-
-
-
-
-
-
-
-//课程安排
 CourseAPI.methods.courseArranged = function (req, res, next) {
     let query = req.query;
-    let Promise = CourseArrangedModel.create(query);
-    Promise.then((results) => {
-        console.log(results);
+    let findCourseNoPromise = CourseModel.find({grade: query.grade, course: query.course});
+    findCourseNoPromise.then((doc) => {
+        delete query.grade;
+        delete query.course;
+        query.courseNo = doc.courseNo;
+        console.log(query)
+        let ArrangedPromise = CourseArrangedModel.create(query);
+        ArrangedPromise.then((doc) => {
+            console.log(doc);
+
+        }, (err) => {
+            console.log(err);
+        })
+
     }, (err) => {
-
+        console.log(err);
     })
+
 }
-
-
 export default CourseAPI.methods;
 
 
