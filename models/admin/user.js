@@ -8,4 +8,4 @@ const User = new Base('User', {
     password: String,           //密码
 });
 
-export default User.methods;
+export default User.model;

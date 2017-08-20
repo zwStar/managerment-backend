@@ -18,4 +18,4 @@ let Teacher = new Base("Teacher",{
     course:[{type:Base.ObjectId(),ref:'Course'}]    //可教课程
 });
 
-export default Teacher.methods;
+export default Teacher.model;

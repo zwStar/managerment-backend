@@ -5,10 +5,12 @@ import User from './user'
 import Student from './student'
 import Course from './course'
 import Teacher from './teacher'
+import Search from './search'
 
 export default {
     User,
     Student,
     Course,
-    Teacher
+    Teacher,
+    Search
 }

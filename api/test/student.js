@@ -13,7 +13,7 @@ export default {
         findGradePromise.then((doc)=>{
             console.log("api test student.js")
             console.log(doc)
-            $.result(res,doc);
+            $.result(res,{grade:doc.grade});
         },(err)=>{
             console.log(err);
         })

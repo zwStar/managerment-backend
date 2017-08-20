@@ -5,7 +5,7 @@ import config from './config'
 import joi from 'joi'
 import md5 from 'blueimp-md5'
 import jwt from 'jsonwebtoken'
-
+import moment from 'moment'
 module.exports.config    = config;
 module.exports.md5 = str=>md5(str);
 module.exports.paramter = joi;
@@ -15,7 +15,7 @@ function createToken(name){
             name
         },
         config.secret, {
-            expiresIn: '1h' // 过期时间 这里只设置10s
+            expiresIn: '24h' // 过期时间 这里只设置10s
         });
     return token;
 }
@@ -43,6 +43,8 @@ function result(res, data, msg, status) {
 module.exports.result = result;
 
 module.exports.checkToken = function (req, res, next) { //从请求cookie中 检查token的状态信息
+    console.log("req.headers");
+    console.log(req.headers);
     let re = /Admin-Token=(.+)/;
 
     let token = req.headers.cookie.match(re)[1];    //从cookie中提取出token
@@ -54,6 +56,7 @@ module.exports.checkToken = function (req, res, next) { //从请求cookie中 检
             }
             return result(res, {error: "登录信息有误"});
         }else{
+
             console.log(decoded)
             req.user = decoded.name;
             next();
@@ -70,3 +73,8 @@ module.exports.isEmpty = function (value) {
         return value === null || value === undefined;
     }
 };
+
+module.exports.dateformat = function (obj, format) {
+    format = format || 'YYYY-MM-DD';
+    return moment(obj).format(format);
+}

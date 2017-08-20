@@ -9,4 +9,4 @@ let Course = new Base("Course",{
     course:String
 });
 
-export default Course.methods;
+export default Course.model;

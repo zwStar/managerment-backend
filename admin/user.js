@@ -12,16 +12,13 @@ let UserAPI = new Base({
 
 
 UserAPI.methods.login = function (req, res, next) {     //注册
-
-    let LoginPromise = UserModel.find({"email": req.body.name, "password": $.md5(req.body.password)});    //返回一个promise对象
+    let LoginPromise = UserModel.findOne({"email": req.body.name, "password": req.body.password});    //返回一个promise对象
 
     LoginPromise.then((documents) => {
         if (!documents) {                        //如果为空 登录失败 返回login failed
-
             return $.result(res, 'login failed');
         }
         //登录成功
-        console.log(documents);
         let name = documents.email;
         return $.result(res, {success: true, "message": "登录成功", name: name, token: $.createToken(name)});           //返回
     })
@@ -64,15 +61,15 @@ UserAPI.methods.register = function (req, res, next) {      //登录
 UserAPI.methods.update = function (req, res, next) {
     if (req.user === undefined)
         $.result(res, "登录信息有误")
-    let findPromise = UserModel.find({email: req.user,password:$.md5(req.body.oldPass)});
+    let findPromise = UserModel.findOne({email: req.user, password: $.md5(req.body.oldPass)});
     findPromise.then((doc) => {
         if (doc === null) {
             $.result(res, "修改失败 账号有误")
         } else {
-            let updatePromise = UserModel.update({"email": req.user},{password:$.md5(req.body.newPass)});
-            updatePromise.then((results)=>{
-                if(results !== null){
-                    $.result(res,{success:true,message:"修改成功"});
+            let updatePromise = UserModel.update({"email": req.user}, {$set: {password: $.md5(req.body.newPass)}});
+            updatePromise.then((results) => {
+                if (results !== null) {
+                    $.result(res, {success: true, message: "修改成功"});
                 }
             })
         }
