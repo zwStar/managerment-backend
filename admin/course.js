@@ -106,6 +106,11 @@ CourseAPI.methods.courseArranged = function (req, res, next) {
     })
 
 }
+
+//已经安排的课程
+CourseAPI.methods.arrangedLists = function (req,res,next) {
+    
+}
 export default CourseAPI.methods;
 
 
